@@ -1,16 +1,35 @@
+#name: Docker Actions
+
+#on: [push]
+
+#jobs:
+#  action:
+#    runs-on: ubuntu-latest
+
+#    steps:
+#      - uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Runs a single command using the runners shell
+#      - name: hello-action
+#        uses: ./.github/actions/hello-world
+#        with:
+#          thirdGreeting: "Learning Lab User"
 name: Docker Actions
 
-on: [push]
+
+on:
+  pull_request:
+    types: [labeled]
 
 jobs:
   action:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      # Runs a single command using the runners shell
+      - uses: actions/checkout@v1
+
       - name: hello-action
         uses: ./.github/actions/hello-world
-        with:
-          thirdGreeting: "Learning Lab User"
+
+      - name: meow
+        uses: ./.github/actions/cat-facts
