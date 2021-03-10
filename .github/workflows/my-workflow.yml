@@ -9,13 +9,7 @@
 #    steps:
 #      - uses: actions/checkout@v2
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      # Runs a single command using the runners shell
-#      - name: hello-action
-#        uses: ./.github/actions/hello-world
-#        with:
-#          thirdGreeting: "Learning Lab User"
-name: Docker Actions
-
+      # Runs a single command using the runnename: Docker Actions
 
 on:
   pull_request:
@@ -33,3 +27,11 @@ jobs:
 
       - name: meow
         uses: ./.github/actions/cat-facts
+        id: cat
+
+      - name: create-issue
+        uses: ./.github/actions/issue-maker
+        with:
+          repoToken: ${{secrets.GITHUB_TOKEN}}
+          catFact: ${{steps.cat.outputs.fact}}
+          issueTitle: "a cat fact for you"
